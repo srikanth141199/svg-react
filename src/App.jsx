@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { arc } from 'd3-shape';
 
 function App() {
 
@@ -10,12 +11,21 @@ function App() {
   const centery =  70;
   const eyeRadius = 50;
 
+  const mouth = arc()
+    .innerRadius(0)
+    .outerRadius(100)
+    .startAngle(0)
+    .endAngle(Math.PI / 2);
+
   return (
     <>
     <svg width={width} height={height}>
-      <circle cx={width/2} cy={height/2} r={(height/2)-stroke_width/2} fill='yellow' stroke='black' strokeWidth={stroke_width}></circle>
-      <circle cx={width/2 - centerx} cy={height/2 - centery} r={eyeRadius}></circle>
-      <circle cx={width/2 + centerx} cy={height/2 - centery} r={eyeRadius}></circle>
+      <g transform={'translate($(centerx),$(centery))'}>
+        <circle r={centery - stroke_width/2} fill='yellow' stroke='black' strokeWidth={stroke_width}></circle>
+        <circle cx={- centerx} cy={- centery} r={eyeRadius}></circle>
+        <circle cx={centerx} cy={- centery} r={eyeRadius}></circle>
+        <path d={mouth()}/>
+      </g>
     </svg>
     </>
   )
