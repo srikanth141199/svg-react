@@ -7,23 +7,27 @@ function App() {
   const width = 960;
   const height = 500;
   const stroke_width = 10;
-  const centerx = 120;
-  const centery =  70;
+  const centerX = width/2;
+  const centerY = height/2;
+  const eyeOffsetX = 120;
+  const eyeOffsetY =  80;
   const eyeRadius = 50;
+  const mouthRadius =160;
+  const mouthWidth = 20;
 
   const mouth = arc()
-    .innerRadius(0)
-    .outerRadius(100)
-    .startAngle(0)
-    .endAngle(Math.PI / 2);
+    .innerRadius(mouthRadius)
+    .outerRadius(mouthRadius+mouthWidth)
+    .startAngle(Math.PI/2)
+    .endAngle(3*(Math.PI/2));
 
   return (
     <>
     <svg width={width} height={height}>
-      <g transform={'translate($(centerx),$(centery))'}>
-        <circle r={centery - stroke_width/2} fill='yellow' stroke='black' strokeWidth={stroke_width}></circle>
-        <circle cx={- centerx} cy={- centery} r={eyeRadius}></circle>
-        <circle cx={centerx} cy={- centery} r={eyeRadius}></circle>
+      <g transform={`translate(${centerX},${centerY})`}>
+        <circle r={centerY - stroke_width/2} fill='yellow' stroke='black' strokeWidth={stroke_width}></circle>
+        <circle cx={-eyeOffsetX} cy={-eyeOffsetY} r={eyeRadius}></circle>
+        <circle cx={eyeOffsetX} cy={-eyeOffsetY} r={eyeRadius}></circle>
         <path d={mouth()}/>
       </g>
     </svg>
