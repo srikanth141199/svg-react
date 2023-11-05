@@ -1,38 +1,27 @@
 import { useState } from 'react'
 import './App.css'
-import { arc } from 'd3-shape';
 
-function App() {
 
-  const width = 960;
-  const height = 500;
-  const stroke_width = 10;
-  const centerX = width/2;
-  const centerY = height/2;
-  const eyeOffsetX = 120;
-  const eyeOffsetY =  80;
-  const eyeRadius = 50;
-  const mouthRadius =160;
-  const mouthWidth = 20;
+import Face from './Face';
+import {range} from 'd3'
 
-  const mouth = arc()
-    .innerRadius(mouthRadius)
-    .outerRadius(mouthRadius+mouthWidth)
-    .startAngle(Math.PI/2)
-    .endAngle(3*(Math.PI/2));
+const array = range(40)
+const width = 160;
+const height = 160;  
 
-  return (
-    <>
-    <svg width={width} height={height}>
-      <g transform={`translate(${centerX},${centerY})`}>
-        <circle r={centerY - stroke_width/2} fill='yellow' stroke='black' strokeWidth={stroke_width}></circle>
-        <circle cx={-eyeOffsetX} cy={-eyeOffsetY} r={eyeRadius}></circle>
-        <circle cx={eyeOffsetX} cy={-eyeOffsetY} r={eyeRadius}></circle>
-        <path d={mouth()}/>
-      </g>
-    </svg>
-    </>
-  )
+
+const App = ()=>{
+  return array.map(()=> 
+  <Face width ={width} height={height} 
+      stroke_width = {10}
+      centerX = {width/2}
+      centerY = {height/2}
+      eyeOffsetX = {30}
+      eyeOffsetY =  {30}
+      eyeRadius = {10}
+      mouthRadius ={40}
+      mouthWidth = {10} />
+      )
 }
 
 export default App
